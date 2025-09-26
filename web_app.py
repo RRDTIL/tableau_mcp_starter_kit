@@ -62,7 +62,14 @@ async def lifespan(app: FastAPI):
                 mcp_tools = await load_mcp_tools(client_session)
                 
                 # Set AI Model
-                llm = ChatOpenAI(model="gpt-4.1", temperature=0)
+                match os.environ['MODEL_PROVIDER']:
+                    case 'OpenAI':
+                        llm = ChatOpenAI(model="gpt-4.1", temperature=0)
+                    case 'Google':
+                        pass
+
+                if llm is None:
+                    raise RuntimeError("Could not initialise llm")
 
                 # Create the agent
                 checkpointer = InMemorySaver()
