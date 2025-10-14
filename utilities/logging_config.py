@@ -17,7 +17,7 @@ def setup_logging(filename="app.log"):
     
     # Suppress MCP warnings
     logging.getLogger('mcp').setLevel(logging.ERROR)
-    logging.getLogger('root').setLevel(logging.ERROR)
+    logging.getLogger('root').setLevel(logging.DEBUG)
     
     # Return logger for the calling module
     return logging.getLogger(__name__)
